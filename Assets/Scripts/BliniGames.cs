@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using System.Collections;
+
 
 // *Метод получает в качестве аргументов два массива типа GameObject[]:
 //1. Массив произвольного размера. ЛЮБОЙ элемент массива может содержать ссылку на Game Object или null.
@@ -34,7 +36,7 @@ using UnityEngine;
 
 public class BliniGames : MonoBehaviour
 {
-    [SerializeField]
+    [Header("Set in inspector")]
     int sizeArrayIn = 120;
     int sizeArrayOut = 100;
 
@@ -52,33 +54,26 @@ public class BliniGames : MonoBehaviour
 
     }
 
+    //private void FixedUpdate()
+    //{
+    //    string inputUser =Cosole.ReadLine
+    //    Methodgo();
+    //}
+
 
     //private void Methodgo(GameObject?[] arr,GameObject[] arr1)
     private void Methodgo()
     {
-
         GameObject?[] arr = new GameObject?[sizeArrayIn];
         GameObject[] arr1 = new GameObject[sizeArrayOut];
-        RandomSort(arr1);
+        
+        Sorting.RandomSort(arr1);
         for (var i = 0; i < sizeArrayOut; i++)
         {
             arr[i] = arr1[i];
+            Debug.Log("Instance of array copyed " + i);
         }
 
     }
 
-    private void RandomSort<T>(T[] a)
-    {
-        System.Random rnd = new System.Random();
-        for (int i = a.Length - 1; i > 0; i--)
-        {
-            int j = rnd.Next(0, i + 1);
-            T tmp = a[i];
-            a[i] = a[j];
-            a[j] = tmp;
-            print("sort ended");
-        }
-
-
-    }
 }
