@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System.Collections;
 
 
 // *Метод получает в качестве аргументов два массива типа GameObject[]:
@@ -40,40 +39,43 @@ public class BliniGames : MonoBehaviour
     int sizeArrayIn = 120;
     int sizeArrayOut = 100;
 
+    GameObject?[] tempArray;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        Methodgo();
+        MethodGO();
+        СheckArray(new GameObject?[] { tempArray });
     }
 
     // Update is called once per frame
-
     void Update()
     {
 
     }
 
-    //private void FixedUpdate()
-    //{
-    //    string inputUser =Cosole.ReadLine
-    //    Methodgo();
-    //}
-
-
     //private void Methodgo(GameObject?[] arr,GameObject[] arr1)
-    private void Methodgo()
+    private void MethodGO()
     {
         GameObject?[] arr = new GameObject?[sizeArrayIn];
         GameObject[] arr1 = new GameObject[sizeArrayOut];
-        
         Sorting.RandomSort(arr1);
+
         for (var i = 0; i < sizeArrayOut; i++)
         {
             arr[i] = arr1[i];
             Debug.Log("Instance of array copyed " + i);
         }
 
+    }
+
+    private void СheckArray(GameObject?[] chk)
+    {
+        for (var i = 0; i < sizeArrayIn; i++)
+        {
+            Debug.Log("Check " + i);
+        }
     }
 
 }

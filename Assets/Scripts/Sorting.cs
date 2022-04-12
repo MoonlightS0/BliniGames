@@ -16,7 +16,6 @@ public class Sorting : MonoBehaviour
         
     }
 
-
     public static void RandomSort<T>(T[] a)
     {
         System.Random rnd = new System.Random();
