@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 // *Метод получает в качестве аргументов два массива типа GameObject[]:
 //1. Массив произвольного размера. ЛЮБОЙ элемент массива может содержать ссылку на Game Object или null.
 //2. Массив произвольного размера, заполненный ссылками на GameObject.
@@ -31,22 +30,20 @@ using UnityEngine;
 //It should not be so that the first objects in order from the second array are placed first, i.e. in this case it should not be known beforehand, 
 //which elements from the second array will be placed.
 
-
-
 public class BliniGames : MonoBehaviour
 {
-    [Header("Set in inspector")]
+    [Header("Size of arraays")]
+    //[Range(1,120)]
+    //[SerializeField]
     int sizeArrayIn = 120;
-    int sizeArrayOut = 100;
-
-    GameObject?[] tempArray;
-
+    //[Range(1,120)]
+    //[SerializeField] 
+    int sizeArrayOut = 15;
 
     // Start is called before the first frame update
     void Start()
     {
         MethodGO();
-        СheckArray(new GameObject?[] { tempArray });
     }
 
     // Update is called once per frame
@@ -55,27 +52,50 @@ public class BliniGames : MonoBehaviour
 
     }
 
-    //private void Methodgo(GameObject?[] arr,GameObject[] arr1)
-    private void MethodGO()
+    private void MethodGO()  //main method for replace FREE (containing null) elements.
     {
-        GameObject?[] arr = new GameObject?[sizeArrayIn];
+        GameObject?[] arr = new GameObject?[sizeArrayIn]; //array 
+        
+        //right now gameObject added manually
+        arr[1] = gameObject;
+        arr[2] = gameObject;
+        arr[3] = gameObject;
+        arr[4] = gameObject;
+
         GameObject[] arr1 = new GameObject[sizeArrayOut];
         Sorting.RandomSort(arr1);
 
+        //int rValue = Random.Range(10, 110);
+        //Debug.Log("Random number = "+ rValue);
+
+        //for (var i = 0; i < sizeArrayOut; i++) //for random numbers of game objects in arr1
+        //{
+
+        //}
+
         for (var i = 0; i < sizeArrayOut; i++)
         {
-            arr[i] = arr1[i];
-            Debug.Log("Instance of array copyed " + i);
+            if (arr[i] == null)
+            {
+                Debug.Log("NULL " + i);
+                arr[i] = arr1[i];
+            }
+            else if (arr[i] == gameObject)
+            {
+                Debug.Log("Array already have GameObject"+ i);
+            }
         }
-
-    }
-
-    private void СheckArray(GameObject?[] chk)
-    {
-        for (var i = 0; i < sizeArrayIn; i++)
+        Debug.Log("Check array");
+        for (var i = 0; i < sizeArrayIn; i++) //checking an array for a result
         {
-            Debug.Log("Check " + i);
+            if (arr1[i] == null)
+            {
+                Debug.Log("NULL " + i);
+            }
+            else if (arr1[i] == gameObject)
+            {
+                Debug.Log("Array already have GameObject"+ i);
+            }
         }
     }
-
 }

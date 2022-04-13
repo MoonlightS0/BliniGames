@@ -25,7 +25,7 @@ public class Sorting : MonoBehaviour
             T tmp = a[i];
             a[i] = a[j];
             a[j] = tmp;
-            Debug.Log("Sort ended " + i);
+            //Debug.Log("Sort ended " + i);
         }
     }
 }
