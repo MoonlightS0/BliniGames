@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 // *Метод получает в качестве аргументов два массива типа GameObject[]:
 //1. Массив произвольного размера. ЛЮБОЙ элемент массива может содержать ссылку на Game Object или null.
@@ -35,15 +36,18 @@ public class BliniGames : MonoBehaviour
     [Header("Size of arraays")]
     //[Range(1,120)]
     //[SerializeField]
-    int sizeArrayIn = 120;
+    int sizeArrayFirstIn = 15;
     //[Range(1,120)]
     //[SerializeField] 
-    int sizeArrayOut = 15;
+    int sizeArraySecondOut = 8;
+    //GameObject[] second_arr;
+
 
     // Start is called before the first frame update
     void Start()
     {
         MethodGO();
+        //Check();
     }
 
     // Update is called once per frame
@@ -54,16 +58,17 @@ public class BliniGames : MonoBehaviour
 
     private void MethodGO()  //main method for replace FREE (containing null) elements.
     {
-        GameObject?[] arr = new GameObject?[sizeArrayIn]; //array 
-        
-        //right now gameObject added manually
-        arr[1] = gameObject;
-        arr[2] = gameObject;
-        arr[3] = gameObject;
-        arr[4] = gameObject;
+        GameObject[] first_arr = new GameObject?[sizeArrayFirstIn]; //array 
 
-        GameObject[] arr1 = new GameObject[sizeArrayOut];
-        Sorting.RandomSort(arr1);
+        //right now gameObject added manually
+        first_arr[0] = gameObject;
+        first_arr[1] = gameObject;
+        first_arr[2] = gameObject;
+        first_arr[3] = gameObject;
+        
+        GameObject[] second_arr = new GameObject[sizeArraySecondOut];
+        second_arr[7] = gameObject;
+        Sorting.RandomSort(second_arr);
 
         //int rValue = Random.Range(10, 110);
         //Debug.Log("Random number = "+ rValue);
@@ -73,29 +78,63 @@ public class BliniGames : MonoBehaviour
 
         //}
 
-        for (var i = 0; i < sizeArrayOut; i++)
+        for (var i = 0; i < sizeArrayFirstIn; i++)
         {
-            if (arr[i] == null)
+            try
             {
-                Debug.Log("NULL " + i);
-                arr[i] = arr1[i];
+                if (first_arr[i] == null)
+                {
+                    //Debug.Log("NULL " + i);
+                    first_arr[i] = second_arr[i];
+                    Debug.Log("NULL " + i);
+                }
+                else if (first_arr[i] == gameObject)
+                {
+                    Debug.Log("Array already have GameObject " + i);
+                }
             }
-            else if (arr[i] == gameObject)
+            catch(IndexOutOfRangeException)
             {
-                Debug.Log("Array already have GameObject"+ i);
+                Debug.Log("Array ended.");
+                //Debug.LogException(e, this);  
             }
+            finally
+            {
+
+            }
+        
         }
+
+
+
         Debug.Log("Check array");
-        for (var i = 0; i < sizeArrayIn; i++) //checking an array for a result
+        for (var i = 0; i < sizeArraySecondOut; i++) //checking an array for a result
         {
-            if (arr1[i] == null)
+            if (second_arr[i] == null)
             {
                 Debug.Log("NULL " + i);
             }
-            else if (arr1[i] == gameObject)
+            else if (second_arr[i] == gameObject)
             {
-                Debug.Log("Array already have GameObject"+ i);
+                Debug.Log("Array already have GameObject " + i);
             }
         }
     }
+
+    //private void Check()
+    //{
+    //    Debug.Log("Check array");
+    //    GameObject[] second_arr = new GameObject[sizeArrayOut];
+    //    for (var i = 0; i < sizeArrayIn; i++) //checking an array for a result
+    //    {
+    //        if (second_arr[i] == null)
+    //        {
+    //            Debug.Log("NULL " + i);
+    //        }
+    //        else if (second_arr[i] == gameObject)
+    //        {
+    //            Debug.Log("Array already have GameObject "+ i);
+    //        }
+    //    }
+    //}
 }
