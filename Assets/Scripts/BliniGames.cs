@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 // *Метод получает в качестве аргументов два массива типа GameObject[]:
 //1. Массив произвольного размера. ЛЮБОЙ элемент массива может содержать ссылку на Game Object или null.
@@ -40,8 +41,9 @@ public class BliniGames : MonoBehaviour
     //[Range(1,120)]
     //[SerializeField] 
     int sizeArraySecondOut = 8;
-    //GameObject[] second_arr;
-
+    public GameObject inst_second_arr;
+    public GameObject[] second_arr;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -58,25 +60,28 @@ public class BliniGames : MonoBehaviour
 
     private void MethodGO()  //main method for replace FREE (containing null) elements.
     {
-        GameObject[] first_arr = new GameObject?[sizeArrayFirstIn]; //array 
-
-        //right now gameObject added manually
+        GameObject[] first_arr = new GameObject?[sizeArrayFirstIn]; //array  first
+        //GameObject[] second_arr = new GameObject[sizeArraySecondOut];//array second
+        second_arr = new GameObject[sizeArraySecondOut];
+        //gameObject[] 
+        //right now gameObjects added manually
         first_arr[0] = gameObject;
         first_arr[1] = gameObject;
         first_arr[2] = gameObject;
         first_arr[3] = gameObject;
-        
-        GameObject[] second_arr = new GameObject[sizeArraySecondOut];
-        second_arr[7] = gameObject;
-        Sorting.RandomSort(second_arr);
+        //
+        //second_arr[7] = gameObject;
+        //Sorting.RandomSort(second_arr);
 
         //int rValue = Random.Range(10, 110);
         //Debug.Log("Random number = "+ rValue);
 
-        //for (var i = 0; i < sizeArrayOut; i++) //for random numbers of game objects in arr1
-        //{
-
-        //}
+        for (var i = 0; i < sizeArraySecondOut; i++) 
+        {
+            GameObject go = Instantiate(inst_second_arr, new Vector3((float)i, 1, 0), Quaternion.identity) as GameObject;
+            go.transform.localScale = Vector3.one;
+            second_arr[i] = go;
+        }
 
         for (var i = 0; i < sizeArrayFirstIn; i++)
         {
@@ -84,8 +89,9 @@ public class BliniGames : MonoBehaviour
             {
                 if (first_arr[i] == null)
                 {
-                    //Debug.Log("NULL " + i);
-                    first_arr[i] = second_arr[i];
+                    first_arr[i] = second_arr[i].gameObject;
+                    
+                    //first_arr[i] = second_arr[i];
                     Debug.Log("NULL " + i);
                 }
                 else if (first_arr[i] == gameObject)
@@ -117,6 +123,14 @@ public class BliniGames : MonoBehaviour
             else if (second_arr[i] == gameObject)
             {
                 Debug.Log("Array already have GameObject " + i);
+            }
+            else if (second_arr[i].tag=="PrefabGameObj")
+            {
+                Debug.Log("gameObject type(PrefabGameObj )" + i);
+            }
+            else
+            {
+                Debug.Log("Another type " + i);
             }
         }
     }

@@ -312,4 +312,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6214d321866f8704caeb1843813912ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myPrefab: {fileID: 8390976843215464909, guid: 229b529c1929c314fb9995e1d94855b1, type: 3}
+  inst_second_arr: {fileID: 8390976843215464909, guid: 229b529c1929c314fb9995e1d94855b1, type: 3}
+  second_arr: []
