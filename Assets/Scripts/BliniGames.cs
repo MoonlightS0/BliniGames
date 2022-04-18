@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
 
 // *Метод получает в качестве аргументов два массива типа GameObject[]:
 //1. Массив произвольного размера. ЛЮБОЙ элемент массива может содержать ссылку на Game Object или null.
