@@ -41,13 +41,23 @@ public class BliniGames : MonoBehaviour
     //[SerializeField] 
     int sizeArraySecondOut = 8;
     public GameObject inst_second_arr;
+
+    public GameObject[] first_arr;
     public GameObject[] second_arr;
-    
 
     // Start is called before the first frame update
     void Start()
     {
-        MethodGO();
+        GameObject[] first_arr = new GameObject?[sizeArrayFirstIn]; //array  first
+        second_arr = new GameObject[sizeArraySecondOut];
+
+        first_arr[0] = gameObject;
+        first_arr[1] = gameObject;
+        first_arr[2] = gameObject;
+        first_arr[3] = gameObject;
+
+        MethodGO(first_arr, second_arr);
+
         //Check();
     }
 
@@ -57,17 +67,17 @@ public class BliniGames : MonoBehaviour
 
     }
 
-    private void MethodGO()  //main method for replace FREE (containing null) elements.
+    private void MethodGO(GameObject[]? f_arr, GameObject[] sec_arr)  //main method for replace FREE (containing null) elements.
     {
-        GameObject[] first_arr = new GameObject?[sizeArrayFirstIn]; //array  first
+        //GameObject[] first_arr = new GameObject?[sizeArrayFirstIn]; //array  first
         //GameObject[] second_arr = new GameObject[sizeArraySecondOut];//array second
-        second_arr = new GameObject[sizeArraySecondOut];
+        //second_arr = new GameObject[sizeArraySecondOut];
         //gameObject[] 
         //right now gameObjects added manually
-        first_arr[0] = gameObject;
-        first_arr[1] = gameObject;
-        first_arr[2] = gameObject;
-        first_arr[3] = gameObject;
+        //first_arr[0] = gameObject;
+        //first_arr[1] = gameObject;
+        //first_arr[2] = gameObject;
+        //first_arr[3] = gameObject;
         //
         //second_arr[7] = gameObject;
         //Sorting.RandomSort(second_arr);
@@ -75,25 +85,25 @@ public class BliniGames : MonoBehaviour
         //int rValue = Random.Range(10, 110);
         //Debug.Log("Random number = "+ rValue);
 
-        for (var i = 0; i < sizeArraySecondOut; i++) 
+        for (var i = 0; i < sizeArraySecondOut; i++) //instantiate 2nd array
         {
             GameObject go = Instantiate(inst_second_arr, new Vector3((float)i, 1, 0), Quaternion.identity) as GameObject;
             go.transform.localScale = Vector3.one;
-            second_arr[i] = go;
+            sec_arr[i] = go;
         }
 
-        for (var i = 0; i < sizeArrayFirstIn; i++)
+        for (var i = 0; i < sizeArrayFirstIn; i++) //
         {
             try
             {
-                if (first_arr[i] == null)
+                if (f_arr[i] == null)
                 {
-                    first_arr[i] = second_arr[i].gameObject;
-                    
-                    //first_arr[i] = second_arr[i];
+                    f_arr[i] = second_arr[i].gameObject;
+
+                    f_arr[i] = second_arr[i];
                     Debug.Log("NULL " + i);
                 }
-                else if (first_arr[i] == gameObject)
+                else if (f_arr[i] == gameObject)
                 {
                     Debug.Log("Array already have GameObject " + i);
                 }
