@@ -36,28 +36,35 @@ public class BliniGames : MonoBehaviour
     [Header("Size of arraays")]
     //[Range(1,120)]
     //[SerializeField]
-    int sizeArrayFirstIn = 15;
+    int sizeArrayFirstIn = 20;
     //[Range(1,120)]
     //[SerializeField] 
-    int sizeArraySecondOut = 8;
+    int sizeArraySecondOut = 9;
     public GameObject inst_second_arr;
-
-    public GameObject[] first_arr;
+    public GameObject?[] first_arr;
     public GameObject[] second_arr;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject[] first_arr = new GameObject?[sizeArrayFirstIn]; //array  first
+        //GameObject?[] first_arr = new GameObject?[sizeArrayFirstIn]; //first array
+        first_arr = new GameObject?[sizeArrayFirstIn]; //first array
         second_arr = new GameObject[sizeArraySecondOut];
-
+        //adding in first array gameObjects 
         first_arr[0] = gameObject;
         first_arr[1] = gameObject;
         first_arr[2] = gameObject;
         first_arr[3] = gameObject;
 
-        MethodGO(first_arr, second_arr);
+        for (var i = 0; i < sizeArraySecondOut; i++) //instantiate 2nd array
+        {
+            GameObject go = Instantiate(inst_second_arr, new Vector3((float)i, 1, 0), Quaternion.identity) as GameObject;
+            go.transform.localScale = Vector3.one;
+            second_arr[i] = go;
+            Debug.Log("instaniate f arr " + i);
+        }
 
+        MethodGO(first_arr, second_arr);
         //Check();
     }
 
@@ -67,40 +74,19 @@ public class BliniGames : MonoBehaviour
 
     }
 
-    private void MethodGO(GameObject[]? f_arr, GameObject[] sec_arr)  //main method for replace FREE (containing null) elements.
+    private void MethodGO(GameObject[]? f_arr, GameObject[] s_arr)  //main method for replace FREE (containing null) elements.
     {
-        //GameObject[] first_arr = new GameObject?[sizeArrayFirstIn]; //array  first
-        //GameObject[] second_arr = new GameObject[sizeArraySecondOut];//array second
-        //second_arr = new GameObject[sizeArraySecondOut];
-        //gameObject[] 
-        //right now gameObjects added manually
-        //first_arr[0] = gameObject;
-        //first_arr[1] = gameObject;
-        //first_arr[2] = gameObject;
-        //first_arr[3] = gameObject;
-        //
-        //second_arr[7] = gameObject;
         //Sorting.RandomSort(second_arr);
-
         //int rValue = Random.Range(10, 110);
         //Debug.Log("Random number = "+ rValue);
 
-        for (var i = 0; i < sizeArraySecondOut; i++) //instantiate 2nd array
-        {
-            GameObject go = Instantiate(inst_second_arr, new Vector3((float)i, 1, 0), Quaternion.identity) as GameObject;
-            go.transform.localScale = Vector3.one;
-            sec_arr[i] = go;
-        }
-
         for (var i = 0; i < sizeArrayFirstIn; i++) //
         {
-            try
+            try //for ignoring exception 
             {
                 if (f_arr[i] == null)
                 {
-                    f_arr[i] = second_arr[i].gameObject;
-
-                    f_arr[i] = second_arr[i];
+                    f_arr[i] = s_arr[i];
                     Debug.Log("NULL " + i);
                 }
                 else if (f_arr[i] == gameObject)
@@ -121,19 +107,18 @@ public class BliniGames : MonoBehaviour
         }
 
 
-
         Debug.Log("Check array");
-        for (var i = 0; i < sizeArraySecondOut; i++) //checking an array for a result
+        for (var i = 0; i < sizeArrayFirstIn; i++) //checking an array for a result
         {
-            if (second_arr[i] == null)
+            if (first_arr[i] == null)
             {
                 Debug.Log("NULL " + i);
             }
-            else if (second_arr[i] == gameObject)
+            else if (first_arr[i] == gameObject)
             {
                 Debug.Log("Array already have GameObject " + i);
             }
-            else if (second_arr[i].tag=="PrefabGameObj")
+            else if (first_arr[i].tag=="PrefabGameObj")
             {
                 Debug.Log("gameObject type(PrefabGameObj )" + i);
             }

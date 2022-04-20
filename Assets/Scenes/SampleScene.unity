@@ -313,4 +313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inst_second_arr: {fileID: 8390976843215464909, guid: 229b529c1929c314fb9995e1d94855b1, type: 3}
+  inst_frist_arr: {fileID: 8390976843215464909, guid: 229b529c1929c314fb9995e1d94855b1, type: 3}
+  first_arr: []
   second_arr: []
