@@ -61,8 +61,6 @@ public class BliniGames : MonoBehaviour
             GameObject go = Instantiate(inst_second_arr, new Vector3((float)i, 1, 0), Quaternion.identity) as GameObject;
             go.transform.localScale = Vector3.one;
             second_arr[i] = go;
-            
-            //Debug.Log("instaniate f arr " + i);
         }
 
         MethodGO(first_arr, second_arr);
@@ -89,9 +87,7 @@ public class BliniGames : MonoBehaviour
                 if (f_arr[i] == null)
                 {
                     f_arr[i] = s_arr[s];
-                    //f_arr[i] = s_arr[i];
                     Debug.Log("NULL " + i);
-                    //s = s + 1;
                     if (s < sizeArraySecondOut)
                     {
                         Debug.Log("s = " + s);
