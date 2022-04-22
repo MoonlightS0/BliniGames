@@ -39,7 +39,7 @@ public class BliniGames : MonoBehaviour
     int sizeArrayFirstIn = 20;
     //[Range(1,120)]
     //[SerializeField] 
-    int sizeArraySecondOut = 9;
+    int sizeArraySecondOut = 10;
     public GameObject inst_second_arr;
     public GameObject?[] first_arr;
     public GameObject[] second_arr;
@@ -61,7 +61,8 @@ public class BliniGames : MonoBehaviour
             GameObject go = Instantiate(inst_second_arr, new Vector3((float)i, 1, 0), Quaternion.identity) as GameObject;
             go.transform.localScale = Vector3.one;
             second_arr[i] = go;
-            Debug.Log("instaniate f arr " + i);
+            
+            //Debug.Log("instaniate f arr " + i);
         }
 
         MethodGO(first_arr, second_arr);
@@ -80,35 +81,46 @@ public class BliniGames : MonoBehaviour
         //int rValue = Random.Range(10, 110);
         //Debug.Log("Random number = "+ rValue);
 
-        for (var i = 0; i < sizeArrayFirstIn; i++) //
+        int s = 0 ;
+        for (var i = 0; i < sizeArrayFirstIn; i++) 
         {
             try //for ignoring exception 
             {
                 if (f_arr[i] == null)
                 {
-                    f_arr[i] = s_arr[i];
+                    f_arr[i] = s_arr[s];
+                    //f_arr[i] = s_arr[i];
                     Debug.Log("NULL " + i);
+                    //s = s + 1;
+                    if (s < sizeArraySecondOut)
+                    {
+                        Debug.Log("s = " + s);
+                        s++;
+                    }
                 }
+
                 else if (f_arr[i] == gameObject)
                 {
+
                     Debug.Log("Array already have GameObject " + i);
                 }
+
             }
-            catch(IndexOutOfRangeException)
+            catch (IndexOutOfRangeException)
             {
-                Debug.Log("Array ended.");
+                Debug.Log("Array ended." + i);
                 //Debug.LogException(e, this);  
             }
-            finally
+            finally //if no exception
             {
 
             }
-        
+
         }
 
 
         Debug.Log("Check array");
-        for (var i = 0; i < sizeArrayFirstIn; i++) //checking an array for a result
+        for (var i = 0; i < sizeArrayFirstIn; i++) //checking first array for a result
         {
             if (first_arr[i] == null)
             {
