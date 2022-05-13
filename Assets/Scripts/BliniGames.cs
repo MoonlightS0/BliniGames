@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Random = UnityEngine.Random; //from unity docs Random - "Because the classes share the name Random, it can be easy to get a CS0104 "ambiguous reference" compiler error if the System and UnityEngine namespaces are both brought in via using"
 
 // *Метод получает в качестве аргументов два массива типа GameObject[]:
 //1. Массив произвольного размера. ЛЮБОЙ элемент массива может содержать ссылку на Game Object или null.
@@ -75,29 +76,57 @@ public class BliniGames : MonoBehaviour
 
     private void MethodGO(GameObject[]? f_arr, GameObject[] s_arr)  //main method for replace FREE (containing null) elements.
     {
+        bool[] ConfirmationArray = new bool[sizeArraySecondOut];
+        //int mrk = 0;
         //Sorting.RandomSort(second_arr);
         //int rValue = Random.Range(10, 110);
         //Debug.Log("Random number = "+ rValue);
 
-        int s = 0 ;
+        int s = 0 ; // value for corretly working cicle
+        //int r = Random.Range(0, sizeArrayFirstIn);
+
         for (var i = 0; i < sizeArrayFirstIn; i++) 
         {
             try //for ignoring exception 
             {
                 if (f_arr[i] == null)
                 {
-                    f_arr[i] = s_arr[s];
-                    Debug.Log("NULL " + i);
-                    if (s < sizeArraySecondOut)
+                    BEGIN:
+                    int RandomNumber = Random.Range(0, s_arr.Length);
+                    if (ConfirmationArray[RandomNumber] == true)
                     {
-                        Debug.Log("s = " + s);
-                        s++;
+                        Debug.Log("Go to BEGIN(RandomNumber) = " + RandomNumber);
+                        if (ConfirmationArray[0] == true && ConfirmationArray[1] == true && ConfirmationArray[2] == true && ConfirmationArray[3] == true && ConfirmationArray[4] == true && ConfirmationArray[5] == true && ConfirmationArray[6] == true && ConfirmationArray[7] == true && ConfirmationArray[8] == true && ConfirmationArray[9] == true)
+                        //if (mrk = i)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            goto BEGIN;
+                        }
+                    }
+                    else if (ConfirmationArray[RandomNumber] == false)
+                    {
+                        f_arr[i] = s_arr[s];
+                        ConfirmationArray[RandomNumber] = true; //mark numbers
+                        //mrk = mrk + 1;
+
+
+                        Debug.Log("NULL " + i);
+                        if (s < sizeArraySecondOut)
+                        {
+                            Debug.Log("s = " + s);
+                            s++;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("ERROR - BULL HAVE STRANGE STATE" + s);
                     }
                 }
-
                 else if (f_arr[i] == gameObject)
                 {
-
                     Debug.Log("Array already have GameObject " + i);
                 }
 
@@ -114,8 +143,7 @@ public class BliniGames : MonoBehaviour
 
         }
 
-
-        Debug.Log("Check array");
+        Debug.Log("Check array STARTED");
         for (var i = 0; i < sizeArrayFirstIn; i++) //checking first array for a result
         {
             if (first_arr[i] == null)
