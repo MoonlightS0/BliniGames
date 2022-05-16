@@ -77,7 +77,7 @@ public class BliniGames : MonoBehaviour
     private void MethodGO(GameObject[]? f_arr, GameObject[] s_arr)  //main method for replace FREE (containing null) elements.
     {
         bool[] ConfirmationArray = new bool[sizeArraySecondOut];
-        //int mrk = 0;
+        int mrk = 10;
         //Sorting.RandomSort(second_arr);
         //int rValue = Random.Range(10, 110);
         //Debug.Log("Random number = "+ rValue);
@@ -96,8 +96,8 @@ public class BliniGames : MonoBehaviour
                     if (ConfirmationArray[RandomNumber] == true)
                     {
                         Debug.Log("Go to BEGIN(RandomNumber) = " + RandomNumber);
-                        if (ConfirmationArray[0] == true && ConfirmationArray[1] == true && ConfirmationArray[2] == true && ConfirmationArray[3] == true && ConfirmationArray[4] == true && ConfirmationArray[5] == true && ConfirmationArray[6] == true && ConfirmationArray[7] == true && ConfirmationArray[8] == true && ConfirmationArray[9] == true)
-                        //if (mrk = i)
+                        //if (ConfirmationArray[0] == true && ConfirmationArray[1] == true && ConfirmationArray[2] == true && ConfirmationArray[3] == true && ConfirmationArray[4] == true && ConfirmationArray[5] == true && ConfirmationArray[6] == true && ConfirmationArray[7] == true && ConfirmationArray[8] == true && ConfirmationArray[9] == true)
+                        if (i == s_arr.Length)
                         {
                             break;
                         }
