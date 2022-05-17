@@ -102,7 +102,7 @@ public class BliniGames : MonoBehaviour
                     {
                         f_arr[i] = s_arr[s]; //Copy the gameObject.
                         ConfirmationArray[RandomNumber] = true; //Mark numbers.
-                        if (s < s_arr.Length) //+1 to step in cycle. For check, how many GameObjects have already been copied. And when need to stop.
+                        if (s < sizeArraySecondOut) //+1 to step in cycle. For check, how many GameObjects have already been copied. And when need to stop.
                         {
                             Debug.Log("s = " + s);
                             s++;
