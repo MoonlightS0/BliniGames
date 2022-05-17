@@ -152,21 +152,4 @@ public class BliniGames : MonoBehaviour
             }
         }
     }
-
-    //private void Check()
-    //{
-    //    Debug.Log("Check array");
-    //    GameObject[] second_arr = new GameObject[sizeArrayOut];
-    //    for (var i = 0; i < sizeArrayIn; i++) //checking an array for a result
-    //    {
-    //        if (second_arr[i] == null)
-    //        {
-    //            Debug.Log("NULL " + i);
-    //        }
-    //        else if (second_arr[i] == gameObject)
-    //        {
-    //            Debug.Log("Array already have GameObject "+ i);
-    //        }
-    //    }
-    //}
 }
