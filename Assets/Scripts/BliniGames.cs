@@ -37,13 +37,13 @@ public class BliniGames : MonoBehaviour
     [Header("Size of arraays")]
     //[Range(1,120)]
     //[SerializeField]
-    int sizeArrayFirstIn = 20;
+    int sizeArrayFirstIn = 20; 
     //[Range(1,120)]
     //[SerializeField] 
     int sizeArraySecondOut = 10;
-    public GameObject inst_second_arr;
-    public GameObject?[] first_arr;
-    public GameObject[] second_arr;
+    public GameObject inst_second_arr; //GameObject for instatiate second array.
+    public GameObject?[] first_arr; //First array. GameObjects is copied into THIS array.
+    public GameObject[] second_arr; //Second array.In array contain gameObjects which copy.
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +51,7 @@ public class BliniGames : MonoBehaviour
         //GameObject?[] first_arr = new GameObject?[sizeArrayFirstIn]; //first array
         first_arr = new GameObject?[sizeArrayFirstIn]; //first array
         second_arr = new GameObject[sizeArraySecondOut];
-        //adding in first array gameObjects 
+        //Adding in first array gameObjects 
         first_arr[0] = gameObject;
         first_arr[1] = gameObject;
         first_arr[2] = gameObject;
@@ -77,55 +77,43 @@ public class BliniGames : MonoBehaviour
     private void MethodGO(GameObject[]? f_arr, GameObject[] s_arr)  //main method for replace FREE (containing null) elements.
     {
         bool[] ConfirmationArray = new bool[sizeArraySecondOut];
-        int mrk = 10;
-        //Sorting.RandomSort(second_arr);
-        //int rValue = Random.Range(10, 110);
-        //Debug.Log("Random number = "+ rValue);
-
-        int s = 0 ; // value for corretly working cicle
-        //int r = Random.Range(0, sizeArrayFirstIn);
+        int s = 0 ; // Value, for corretly working cicle.
 
         for (var i = 0; i < sizeArrayFirstIn; i++) 
         {
-            try //for ignoring exception 
+            try //For ignoring exception. 
             {
                 if (f_arr[i] == null)
                 {
                     BEGIN:
-                    int RandomNumber = Random.Range(0, s_arr.Length);
-                    if (ConfirmationArray[RandomNumber] == true)
+                    int RandomNumber = Random.Range(0, s_arr.Length); //Generateing random [number] for satisfy task condition ("It should not be so that the first objects in order from the second array are placed first, i.e. in this case it should not be known beforehand,which elements from the second array will be placed.")
+                    if (ConfirmationArray[RandomNumber] == true) //Condition - if the number is marked(already copied in a new array).
                     {
-                        Debug.Log("Go to BEGIN(RandomNumber) = " + RandomNumber);
-                        //if (ConfirmationArray[0] == true && ConfirmationArray[1] == true && ConfirmationArray[2] == true && ConfirmationArray[3] == true && ConfirmationArray[4] == true && ConfirmationArray[5] == true && ConfirmationArray[6] == true && ConfirmationArray[7] == true && ConfirmationArray[8] == true && ConfirmationArray[9] == true)
-                        if (i == s_arr.Length)
+                        if (i == s_arr.Length) //If step of cycle = s_arr.Length , check and generate random value is not required. First EXIT of cycle.
                         {
                             break;
                         }
-                        else
+                        else //Else we need back to point(BEGIN) - for generate new value.
                         {
                             goto BEGIN;
                         }
                     }
                     else if (ConfirmationArray[RandomNumber] == false)
                     {
-                        f_arr[i] = s_arr[s];
-                        ConfirmationArray[RandomNumber] = true; //mark numbers
-                        //mrk = mrk + 1;
-
-
-                        Debug.Log("NULL " + i);
-                        if (s < sizeArraySecondOut)
+                        f_arr[i] = s_arr[s]; //Copy the gameObject.
+                        ConfirmationArray[RandomNumber] = true; //Mark numbers.
+                        if (s < s_arr.Length) //+1 to step in cycle. For check, how many GameObjects have already been copied. And when need to stop.
                         {
                             Debug.Log("s = " + s);
                             s++;
                         }
                     }
-                    else
+                    else //for exclude ERRORs.
                     {
-                        Debug.Log("ERROR - BULL HAVE STRANGE STATE" + s);
+                        Debug.Log("ERROR - Bool ConfirmationArray[RandomNumber=] " +  RandomNumber + "has strage state, s = " + s);
                     }
                 }
-                else if (f_arr[i] == gameObject)
+                else if (f_arr[i] == gameObject) //If the gameObject is already in the current array number.
                 {
                     Debug.Log("Array already have GameObject " + i);
                 }
@@ -136,7 +124,7 @@ public class BliniGames : MonoBehaviour
                 Debug.Log("Array ended." + i);
                 //Debug.LogException(e, this);  
             }
-            finally //if no exception
+            finally //If no exception
             {
 
             }
@@ -144,7 +132,7 @@ public class BliniGames : MonoBehaviour
         }
 
         Debug.Log("Check array STARTED");
-        for (var i = 0; i < sizeArrayFirstIn; i++) //checking first array for a result
+        for (var i = 0; i < sizeArrayFirstIn; i++) //Checking
         {
             if (first_arr[i] == null)
             {
